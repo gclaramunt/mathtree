@@ -7,7 +7,7 @@ package mathtree
 
 object Main {
 
-  object Op extends Enumeration {
+ object Op extends Enumeration {
     type Op = Value
     val Add, Subtract, Multiply, Divide = Value
   }
@@ -66,7 +66,7 @@ object Main {
     val head::rest=terms
     head match {
       case x: Operator => {
-          val stop::st0::st1::srest=stack
+          val st0::st1::srest=stack
           rest match {
             case Nil => new ComplexExpr(x, st1, st0)
             case _ =>  make_expr(rest, new ComplexExpr(x, st1, st0) :: srest)
@@ -80,7 +80,7 @@ object Main {
     expr match {
       case SimpleExpr(value) => value;
       case ComplexExpr(op,op1,op2) =>
-      op match {
+      op.value match {
         case Add =>  calculate(op1) + calculate(op2)
         case Subtract => calculate(op1) - calculate(op2)
         case Multiply => calculate(op1) * calculate(op2)
